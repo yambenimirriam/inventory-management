@@ -2,16 +2,24 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '@/app/reduct';
-import { setIsSidebarCollapsed } from '@/state';
+import {
+  setIsDarkMode,
+  setIsSidebarCollapsed,
+} from '@/state';
 import {
   Menu,
+  Moon,
   Search,
   Settings,
+  Sun,
 } from 'lucide-react';
 import Link from 'next/link';
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
+  const isDarkMode = useAppSelector(
+    (state) => state.global.isDarkMode
+  );
   const isSidebarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed
   );
@@ -44,9 +52,31 @@ const Navbar = () => {
       </div>
       {/* icons */}
       <div className='flex items-center'>
+        <button
+          onClick={() =>
+            dispatch(setIsDarkMode(!isDarkMode))
+          }
+          className={
+            isDarkMode
+              ? `rounded p-2 hover:bg-gray-700`
+              : `rounded p-2 hover:bg-gray-100`
+          }
+        >
+          {isDarkMode ? (
+            <Sun className='h-6 w-6 cursor-pointer dark:text-white' />
+          ) : (
+            <Moon className='h-6 w-6 cursor-pointer dark:text-white' />
+          )}
+        </button>
         <Link
           href='/settings'
-          className='h-min w-min rounded p-2 hover:bg-gray-100'
+          className='{
+          isDarkmode
+          : `h-min w-min rounded p-2 hover:bg-gray-100`
+          ? `h-min w-min rounded p-2 hover:bg-gray-700`
+          
+          }
+          h-min w-min rounded p-2 hover:bg-gray-100'
         >
           <Settings className='dark:text-white h-6 w-6 cursor-pointer' />
         </Link>
