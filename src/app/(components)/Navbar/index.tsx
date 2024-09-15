@@ -71,7 +71,7 @@ const Navbar = () => {
         <Link
           href='/settings'
           className='{
-          isDarkmode
+          isDarkMode
           : `h-min w-min rounded p-2 hover:bg-gray-100`
           ? `h-min w-min rounded p-2 hover:bg-gray-700`
           

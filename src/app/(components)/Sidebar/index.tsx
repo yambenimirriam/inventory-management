@@ -30,8 +30,7 @@ const Sidebar = () => {
     (state) => state.global.isSidebarCollapsed
   );
 
-  const sidebarClassNames =
-    'fixed h-[100%] flex-col bg-white justify-between shadow-xl transition-all duration-300 dark:bg-black overflow-y-auto ${isSidebarCollapsed ? "w-0 hidden " : "w-64"}';
+  const sidebarClassNames = `fixed h-[100%] flex-col bg-white justify-between shadow-xl transition-all duration-300 dark:bg-black overflow-y-auto ${isSidebarCollapsed ? 'w-0 hidden ' : 'w-64'}`;
 
   return (
     <div className={sidebarClassNames}>

@@ -29,23 +29,14 @@ const DashboardLayout = ({
       );
     }
   }, [isDarkMode]);
-  useEffect(() => {
-    if (isSidebarCollapsed) {
-      document.documentElement.classList.add(
-        'md:pl-64'
-      );
-    } else {
-      document.documentElement.classList.remove(
-        'md:pl-64'
-      );
-    }
-  });
 
   return (
     <div className='flex min-h-screen w-full bg-gray-50 text-gray-900'>
       {/* side bar */}
       <Sidebar />
-      <main className='flex w-full flex-col bg-gray-50 dark:bg-dark-bg ${isSidebarCollapsed ? "": " md:pl-64"}'>
+      <main
+        className={`flex w-full flex-col bg-gray-50 dark:bg-dark-bg ${isSidebarCollapsed ? '' : ' md:pl-64'}`}
+      >
         {/* nav bar */}
         <Navbar />
         {children}
