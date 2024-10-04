@@ -2,13 +2,13 @@
 
 import { LockIcon } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const Sidebar = () => {
-  const [showProjects, setShowProjects] =
-    useState(true);
-  const [showPriority, setShowPriority] =
-    useState(true);
+  //   const [showProjects, setShowProjects] =
+  //     useState(true);
+  //   const [showPriority, setShowPriority] =
+  //     useState(true);
 
   const sidebarClassNames =
     'fixed h-[100%] flex-col bg-white justify-between shadow-xl transition-all duration-300 dark:bg-black overflow-y-auto w-64';
