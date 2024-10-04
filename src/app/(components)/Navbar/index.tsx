@@ -1,11 +1,38 @@
-import { Search, Settings } from 'lucide-react';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '@/app/reduct';
+import { setIsSidebarCollapsed } from '@/state';
+import {
+  Menu,
+  Search,
+  Settings,
+} from 'lucide-react';
 import Link from 'next/link';
 
 const Navbar = () => {
+  const dispatch = useAppDispatch();
+  const isSidebarCollapsed = useAppSelector(
+    (state) => state.global.isSidebarCollapsed
+  );
+
   return (
     <div className='flex items-center justify-between bg-white px-4 py 3 dark:bg-black py-3'>
-      {/* search bar    */}
       <div className='flex items-center gap-8'>
+        {!isSidebarCollapsed ? null : (
+          <button
+            onClick={() =>
+              dispatch(
+                setIsSidebarCollapsed(
+                  !isSidebarCollapsed
+                )
+              )
+            }
+          >
+            <Menu className='dark:text-white h-8 w-8 cursor-pointer' />
+          </button>
+        )}
+        {/* search bar    */}
         <div className='relative flex h-min w-[200px'>
           <Search className='absolute left-[4px] top-1/2 -translate-y-1/2 transform cursor-pointer dark:text-white' />
           <input
