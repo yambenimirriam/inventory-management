@@ -1,7 +1,19 @@
 'use client';
 
-import { LockIcon } from 'lucide-react';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '@/app/reduct';
+import { setIsSidebarCollapsed } from '@/state';
+import {
+  Home,
+  LockIcon,
+  LucideIcon,
+  X,
+} from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 // import { useState } from 'react';
 
 const Sidebar = () => {
@@ -10,8 +22,16 @@ const Sidebar = () => {
   //   const [showPriority, setShowPriority] =
   //     useState(true);
 
+  const dispatch = useAppDispatch();
+  // const isDarkMode = useAppSelector(
+  //   (state) => state.global.isDarkMode
+  // );
+  const isSidebarCollapsed = useAppSelector(
+    (state) => state.global.isSidebarCollapsed
+  );
+
   const sidebarClassNames =
-    'fixed h-[100%] flex-col bg-white justify-between shadow-xl transition-all duration-300 dark:bg-black overflow-y-auto w-64';
+    'fixed h-[100%] flex-col bg-white justify-between shadow-xl transition-all duration-300 dark:bg-black overflow-y-auto ${isSidebarCollapsed ? "w-0 hidden " : "w-64"}';
 
   return (
     <div className={sidebarClassNames}>
@@ -21,6 +41,20 @@ const Sidebar = () => {
           <div className='text-xl font-bold text-gray-800 dark:text-white'>
             MIRE
           </div>
+          {isSidebarCollapsed ? null : (
+            <button
+              className='py-3'
+              onClick={() =>
+                dispatch(
+                  setIsSidebarCollapsed(
+                    !isSidebarCollapsed
+                  )
+                )
+              }
+            >
+              <X className='h-6 w-6 hover:text-gray-500 text-gray-800 dark:text-white' />
+            </button>
+          )}
         </div>
         {/* team */}
         <div className='flex items-start gap-5 border-y-[1.5px] border-gray-200 px-8 py-4 dark:border-gray-700'>
@@ -43,8 +77,65 @@ const Sidebar = () => {
           </div>
         </div>
         {/* navbar links  */}
+        <nav className='z-10 w-full'>
+          <SidebarLink
+            href='/'
+            icon={Home}
+            label='Home'
+          />
+        </nav>
       </div>
     </div>
+  );
+};
+
+interface SidebarLinkProps {
+  href: string;
+  icon: LucideIcon;
+  label: string;
+  // isCollapsed: boolean;
+}
+
+const SidebarLink = ({
+  href,
+  icon: Icon,
+  label,
+  // isCollapsed,
+}: SidebarLinkProps) => {
+  const pathname = usePathname();
+  const isActive =
+    pathname === href ||
+    (pathname === '/' && href === '/dashboard');
+  // const screenWith = window.innerWidth;
+
+  // const dispatch = useAppDispatch();
+  // // const isDarkMode = useAppSelector(
+  // //   (state) => state.global.isDarkMode
+  // // );
+  // const isSidebarCollapsed = useAppSelector(
+  //   (state) => state.global.isSidebarCollapsed
+  // );
+
+  return (
+    <Link href={href} className='w-full'>
+      {/* You can handle the dynamic class name logic here */}
+      <div
+        className={`relative flex cursor-pointer items-center gap-3 transition-colors hover:bg-gray-700 ${
+          isActive
+            ? 'bg-gray-100 dark:bg-gray-700'
+            : ''
+        }`}
+      >
+        {isActive && (
+          <div className='absolute h-[100%] left-0 top-0 w-1 rounded-full bg-blue-200' />
+        )}
+        <Icon className='h-6 w-6 text-gray-800 dark:text-gray-200' />
+
+        <span className='font-medium text-gray-1000 dark:text-gray-100'>
+          {label}
+        </span>
+      </div>
+    </Link>
   );
 };
 
