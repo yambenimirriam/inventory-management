@@ -6,9 +6,14 @@ import {
 } from '@/app/reduct';
 import { setIsSidebarCollapsed } from '@/state';
 import {
+  Briefcase,
   Home,
   LockIcon,
   LucideIcon,
+  Search,
+  Settings,
+  User,
+  Users,
   X,
 } from 'lucide-react';
 import Image from 'next/image';
@@ -82,6 +87,31 @@ const Sidebar = () => {
             icon={Home}
             label='Home'
           />
+          <SidebarLink
+            href='/timeline'
+            icon={Briefcase}
+            label='Timeline'
+          />
+          <SidebarLink
+            href='/search'
+            icon={Search}
+            label='Search'
+          />
+          <SidebarLink
+            href='/settings'
+            icon={Settings}
+            label='Settings'
+          />
+          <SidebarLink
+            href='/users'
+            icon={User}
+            label='Users'
+          />
+          <SidebarLink
+            href='/teams'
+            icon={Users}
+            label='Teams'
+          />
         </nav>
       </div>
     </div>
@@ -92,7 +122,6 @@ interface SidebarLinkProps {
   href: string;
   icon: LucideIcon;
   label: string;
-  // isCollapsed: boolean;
 }
 
 const SidebarLink = ({
@@ -105,15 +134,6 @@ const SidebarLink = ({
   const isActive =
     pathname === href ||
     (pathname === '/' && href === '/dashboard');
-  // const screenWith = window.innerWidth;
-
-  // const dispatch = useAppDispatch();
-  // // const isDarkMode = useAppSelector(
-  // //   (state) => state.global.isDarkMode
-  // // );
-  // const isSidebarCollapsed = useAppSelector(
-  //   (state) => state.global.isSidebarCollapsed
-  // );
 
   return (
     <Link href={href} className='w-full'>
@@ -123,7 +143,7 @@ const SidebarLink = ({
           isActive
             ? 'bg-gray-100 dark:bg-gray-700'
             : ''
-        }`}
+        } justify-start px-8 py-3 dark:hover:bg-gray-100`}
       >
         {isActive && (
           <div className='absolute h-[100%] left-0 top-0 w-1 rounded-full bg-blue-200' />
