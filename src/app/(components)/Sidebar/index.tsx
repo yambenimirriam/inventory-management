@@ -6,12 +6,19 @@ import {
 } from '@/app/reduct';
 import { setIsSidebarCollapsed } from '@/state';
 import {
+  AlertCircle,
+  AlertOctagon,
+  AlertTriangle,
   Briefcase,
+  ChevronDown,
+  ChevronUp,
   Home,
+  Layers3,
   LockIcon,
   LucideIcon,
   Search,
   Settings,
+  ShieldAlert,
   User,
   Users,
   X,
@@ -19,13 +26,13 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-// import { useState } from 'react';
+import { useState } from 'react';
 
 const Sidebar = () => {
-  //   const [showProjects, setShowProjects] =
-  //     useState(true);
-  //   const [showPriority, setShowPriority] =
-  //     useState(true);
+  const [showProjects, setShowProjects] =
+    useState(true);
+  const [showPriority, setShowPriority] =
+    useState(true);
 
   const dispatch = useAppDispatch();
   // const isDarkMode = useAppSelector(
@@ -113,6 +120,65 @@ const Sidebar = () => {
             label='Teams'
           />
         </nav>
+        {/* Project Links */}
+        <button
+          onClick={() =>
+            setShowProjects((prev) => !prev)
+          }
+          className='flex w-full items-center justify-between px-8 py-3 text-gray-500'
+        >
+          <span className=''>Projects</span>
+          {showProjects ? (
+            <ChevronUp className='h-5 w-5' />
+          ) : (
+            <ChevronDown className='h-5 w-5' />
+          )}
+        </button>
+        {/* Projects List */}
+
+        {/* Priority Links */}
+        <button
+          onClick={() =>
+            setShowPriority((prev) => !prev)
+          }
+          className='flex w-full items-center justify-between px-8 py-3 text-gray-500'
+        >
+          <span className=''>Priority</span>
+          {showPriority ? (
+            <ChevronUp className='h-5 w-5' />
+          ) : (
+            <ChevronDown className='h-5 w-5' />
+          )}
+        </button>
+        {showPriority && (
+          <>
+            <SidebarLink
+              href='/priority/urgent'
+              icon={AlertCircle}
+              label='Urgent'
+            />
+            <SidebarLink
+              href='/priority/high'
+              icon={ShieldAlert}
+              label='High'
+            />
+            <SidebarLink
+              href='/priority/medium'
+              icon={AlertTriangle}
+              label='Medium'
+            />
+            <SidebarLink
+              href='/priority/low'
+              icon={AlertOctagon}
+              label='Low'
+            />
+            <SidebarLink
+              href='/priority/backlog'
+              icon={Layers3}
+              label='Backlog'
+            />
+          </>
+        )}
       </div>
     </div>
   );
