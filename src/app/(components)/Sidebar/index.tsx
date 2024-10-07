@@ -151,7 +151,7 @@ const Sidebar = () => {
           )}
         </button>
         {showPriority && (
-          <>
+          <nav>
             <SidebarLink
               href='/priority/urgent'
               icon={AlertCircle}
@@ -177,7 +177,7 @@ const Sidebar = () => {
               icon={Layers3}
               label='Backlog'
             />
-          </>
+          </nav>
         )}
       </div>
     </div>
