@@ -35,9 +35,9 @@ const Sidebar = () => {
     useState(true);
 
   const dispatch = useAppDispatch();
-  // const isDarkMode = useAppSelector(
-  //   (state) => state.global.isDarkMode
-  // );
+  const isDarkMode = useAppSelector(
+    (state) => state.global.isDarkMode
+  );
   const isSidebarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed
   );
